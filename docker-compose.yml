@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+  ff-server-api:
+    build: .
+    restart: always
+    container_name: ff-server-api
+    ports:
+      - 3008:3001
+    environment:
+      BACKOFFICE_DB_TYPE: ${BACKOFFICE_DB_TYPE}
+      BACKOFFICE_DB_HOST: ${BACKOFFICE_DB_HOST}
+      BACKOFFICE_DB_NAME: ${BACKOFFICE_DB_NAME}
+      BACKOFFICE_DB_USER: ${BACKOFFICE_DB_USER}
+      BACKOFFICE_DB_PASSWORD: ${BACKOFFICE_DB_PASSWORD}
+      BACKOFFICE_DB_PORT: ${BACKOFFICE_DB_PORT}
+      POS_DB_TYPE: ${POS_DB_TYPE}
+      POS_DB_HOST: ${POS_DB_HOST}
+      POS_DB_NAME: ${POS_DB_NAME}
+      POS_DB_USER: ${POS_DB_USER}
+      POS_DB_PASSWORD: ${POS_DB_PASSWORD}
+      POS_DB_PORT: ${POS_DB_PORT}
+      KAFKA_SERVER_IP: ${KAFKA_SERVER_IP}  # เพิ่มบรรทัดนี้
+      KAFKA_PORT_INTERNAL: ${KAFKA_PORT_INTERNAL}  # เพิ่มบรรทัดนี้
+      KAFKA_PORT_EXTERNAL: ${KAFKA_PORT_EXTERNAL}  # เพิ่มบรรทัดนี้
+      TZ: Asia/Bangkok
+    env_file:
+      - .env
+    volumes:
+      - ./uploads:/usr/src/app/uploads
+      - ./uploadsb:/usr/src/app/uploadsb
+
+volumes:
+  uploads:
+  uploadsb:
